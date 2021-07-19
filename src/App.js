@@ -1,12 +1,12 @@
 import './App.css';
-import Message from './message';
+import Message from './components/message';
 
-const msgText = 'React first lesson';
+const messsageText = 'React first lesson';
 
 function App(props) {
   return (
     <div className="App">
-      <Message msgText={msgText}/>
+      <Message messsageText={messsageText}/>
     </div>
   );
 }
