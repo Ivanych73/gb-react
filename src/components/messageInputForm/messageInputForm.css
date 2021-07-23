@@ -1,11 +1,13 @@
 .messageInputForm {
     border: 1px solid firebrick;
     border-radius: 5px;
-    min-width: 50%;
+    width: 100%;
+    box-sizing: border-box;
     padding: 10px;
     margin: 5px;
     display: flex;
     justify-content: space-around;
+    background-color: white;
 }
 
 .messageInput {
@@ -13,11 +15,12 @@
     padding: 10px;
     border: 1px solid fuchsia;
     border-radius: 5px;
+    background-color: white;
 }
 
 .submitButton {
     min-width: 80px;
-    box-sizing: border-box;    
+    box-sizing: border-box;
     border: 1px solid fuchsia;
     border-radius: 5px;
     background-color: white;
@@ -34,7 +37,7 @@
     box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
 }
 
-.submitButton:active {    
+.submitButton:active {
     transform: scale(0.95);
     box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
 }
