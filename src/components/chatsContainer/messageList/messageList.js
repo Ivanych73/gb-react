@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import { getMessages } from '../../../store/messages/selectors';
+import { getMessagesByChatId } from '../../../store/messages/selectors';
 import Message from './message/message'
 
 function MessageList(props) {
-    const messages = useSelector(getMessages(props.chatId))
+    const messages = useSelector(getMessagesByChatId(props.chatId))
     return (
         messages.map(
             (message, index) =>

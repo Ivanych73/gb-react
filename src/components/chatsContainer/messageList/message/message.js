@@ -1,19 +1,22 @@
 import './message.css';
 import { useSelector } from "react-redux"
 import { getProfile } from '../../../../store/profile/selectors'
+import { LOCAL_USER_ID } from '../../../../App'
 
 function Message(props) {
-    const { name } = useSelector(getProfile());
-    let messageStyle;
-    if (props.message.author === name) {
+    const {name}  = useSelector(getProfile());
+    let messageStyle, author;
+    if (props.message.author === LOCAL_USER_ID) {
         messageStyle = 'message-author'
+        author = name;
     } else {
-        messageStyle = 'message-other'
+        messageStyle = 'message-other';
+        author = props.message.author
     }
     return (
         <div className = {messageStyle} >
             <div className= 'author'>
-                <p>{props.message.author}</p>
+                <p>{author}</p>
             </div>
             <div className = 'text'>
                 <p>{props.message.text}</p>

@@ -1,16 +1,16 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import './messageInputForm.css';
 import { TextField, Button, Icon, useTheme } from '@material-ui/core';
-import { useSelector } from "react-redux"
+import { ChatSelectedContext } from '../../chatsContainer'
 
 function MessageInputForm(props) {
+    const chatSelected = useContext(ChatSelectedContext)
     const [value, setValue] = useState('');
     const handleChange = (event) => {
         setValue(event.target.value);
       }
-    const username = useSelector((state) => state.profile.name);
     const submitMessage = () => {
-        props.addMessage(username, value);
+        props.submitMessage(value);
         setValue('');
     }
     const inputRef = useRef(null);
@@ -20,7 +20,7 @@ function MessageInputForm(props) {
       }, [value]);
     const theme = useTheme();
     const setLabel = () => {
-        if (props.chatSelected) {
+        if (chatSelected) {
             return "Ваше сообщение:"
         } else {
             return "Сначала выберите чат!"
@@ -47,7 +47,7 @@ function MessageInputForm(props) {
                 color="primary"
                 endIcon={<Icon>send</Icon>}
                 onClick={submitMessage}
-                disabled={!props.chatSelected}
+                disabled={!chatSelected}
             >
             </Button>
         </div>
