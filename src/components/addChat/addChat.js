@@ -1,20 +1,27 @@
 import { TextField, Button, Grid } from '@material-ui/core';
 import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { createAddChatAction } from "../../store/chats/actions"
 import ChatList from '../chatsContainer/chatList/chatList'
 import faker from 'faker'
 import './addChat.css'
+import { getMaxChatId } from '../../store/chats/selectors';
+
+export const addChatTestIds = {
+    add: 'addChat-add',
+    textField: 'addChat-textField'
+}
 
 function AddChat(props) {
     const dispatch = useDispatch();
     const [value, setValue] = useState('')
     const handleChange = (event) => {
         setValue(event.target.value)
-    }
+    }    
+    const newChatId = useSelector(getMaxChatId())+1;
     const addNewChat = () => {
-        dispatch(createAddChatAction({name:value, avatar: faker.image.avatar(),}));
-        alert(`Добавлен новый чат ${value}`)
+        dispatch(createAddChatAction({name:value, avatar: faker.image.avatar(), id: newChatId}));
+        alert(`Добавлен новый чат ${value} с ID ${newChatId}`)
         setValue('');
     }
     const inputRef = useRef(null);
@@ -36,6 +43,7 @@ function AddChat(props) {
                         onChange = {handleChange}
                         value={value}
                         inputRef={inputRef}
+                        inputProps = {{"data-testid":addChatTestIds.textField}}
                     >
                     </TextField>
                 </Grid>
@@ -45,6 +53,7 @@ function AddChat(props) {
                         color="secondary"
                         onClick = {addNewChat}
                         disabled = {value === ''}
+                        data-testid = {addChatTestIds.add}
                     >
                     Создать чат
                     </Button>
